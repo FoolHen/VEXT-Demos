@@ -1,0 +1,12 @@
+{
+	"Name": "NoRecoilReset",
+	"Authors": [ "FoolHen" ],
+	"Description": "Disables weapons' recoil resetting, so the camera doesn't fall back to the starting angle",
+	"URL": "none",
+	"Version": "1.0.0",
+	"HasWebUI": false,
+	"HasVeniceEXT": true,
+	"Dependencies": {
+		"veniceext": "^1.0.0"
+	}
+}
