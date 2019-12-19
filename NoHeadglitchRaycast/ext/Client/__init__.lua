@@ -34,7 +34,7 @@ function Raycast()
 		transform.trans.z + (direction.z * MAX_CAST_DISTANCE))
 
 	-- Perform raycast, returns a RayCastHit object.
-	local raycast = RaycastManager:Raycast(castStart, castEnd, 2)
+	local raycast = RaycastManager:Raycast(castStart, castEnd, RayCastFlags.DontCheckWater | RayCastFlags.DontCheckCharacter | RayCastFlags.DontCheckRagdoll)
 
 	local localPlayer = PlayerManager:GetLocalPlayer()
 
