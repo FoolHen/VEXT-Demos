@@ -4,7 +4,16 @@ A simple file that you can add to your mods to help with managing round logic.
 
 ## API
 
-If you want to use this in your mods simply copy the `round.lua` script to your mod's server folder, and require the class in a server script with ``local Round = require('Round')``. Then create an instance, for example ``local m_Round = Round(number roundTime[, number minPlayers, number preRoundTime, number roundOverTime, boolean announceInChat])``. The constructor parameters are the following:
+If you want to use this in your mods first add this to your client script:
+```Lua
+Events:Subscribe('Engine:Message', function(message)
+	if message.type == MessageType.CoreEnteredIngameMessage then
+		NetEvents:SendLocal('BoxGame:PlayerReady')
+	end
+end)
+```
+
+Then copy the `round.lua` script to your mod's server folder, and require the class in a server script with ``local Round = require('Round')``. Then create an instance, for example ``local m_Round = Round(number roundTime[, number minPlayers, number preRoundTime, number roundOverTime, boolean announceInChat])``. The constructor parameters are the following:
 
 | Argument | Description |
 | ------ | ----------- |
