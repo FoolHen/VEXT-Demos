@@ -14,7 +14,7 @@ function Round:__init(roundTime, minPlayers, preRoundTime, roundOverTime, announ
 	Events:Subscribe('Engine:Update', self, self._onUpdate)
 	Events:Subscribe('Player:Destroyed', self, self._onPlayerDestroyed)
 
-	NetEvents:Subscribe('BoxGame:PlayerReady', self, self._onPlayerReady)
+	NetEvents:Subscribe('Round:PlayerReady', self, self._onPlayerReady)
 
 	self._minPlayers = minPlayers or DEFAULT_MIN_PLAYERS
 	self._announceInChat = announceInChat or true

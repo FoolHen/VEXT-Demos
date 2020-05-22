@@ -8,7 +8,7 @@ If you want to use this in your mods first add this to your client script:
 ```Lua
 Events:Subscribe('Engine:Message', function(message)
 	if message.type == MessageType.CoreEnteredIngameMessage then
-		NetEvents:SendLocal('BoxGame:PlayerReady')
+		NetEvents:SendLocal('Round:PlayerReady')
 	end
 end)
 ```
