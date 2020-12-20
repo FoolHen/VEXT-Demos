@@ -13,6 +13,7 @@ local DEFAULT_MIN_PLAYERS = 2
 function Round:__init(roundTime, minPlayers, preRoundTime, roundOverTime, announceInChat)
 	Events:Subscribe('Engine:Update', self, self._onUpdate)
 	Events:Subscribe('Player:Destroyed', self, self._onPlayerDestroyed)
+	Events:Subscribe('Level:Loaded', self, self._onLevelLoaded)
 
 	NetEvents:Subscribe('Round:PlayerReady', self, self._onPlayerReady)
 
@@ -34,6 +35,12 @@ function Round:_resetVars()
 	self._currentRoundTime = 0
 	self._currentRoundOverTime = 0
 	self._currentPreRoundTime = 0
+end
+
+function Round:_onLevelLoaded()
+	self._playersReady = {}
+	self._roundState = RoundState.WaitingForPlayers
+	self:_resetVars()
 end
 
 function Round:getPlayersReady()
@@ -58,16 +65,11 @@ end
 
 function Round:_onPlayerReady(player)
 	print('player '..player.name..' ready')
-	table.insert(self._playersReady, player.guid)
+	self._playersReady[tostring(player.guid)] = player.guid
 end
 
 function Round:_onPlayerDestroyed(player)
-	for i, playerGuid in pairs(self._playersReady) do
-		if playerGuid == player.guid then
-			table.remove(self._playersReady, i)
-			return
-		end
-	end
+	self._playersReady[tostring(player.guid)] = nil
 end
 
 function Round:_numOfPlayersReady()
